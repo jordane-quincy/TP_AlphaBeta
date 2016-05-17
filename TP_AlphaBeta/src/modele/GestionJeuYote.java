@@ -29,6 +29,10 @@ public class GestionJeuYote {
 	/**matrice indiquant si une case est libre(0), ou prise par un joueur (1 ou 2)*/
 	int[][] matriceJeu;
 	
+	public int[][] getMatriceJeu() {
+		return matriceJeu;
+	}
+
 	/**no du joeur devant agir*/
 	int noJoueurActif;
 	

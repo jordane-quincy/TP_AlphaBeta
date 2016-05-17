@@ -261,6 +261,7 @@ public class AppliYote extends Application implements  EventHandler<MouseEvent> 
 						{
 							pionSelectionne=null;
 						}
+						//appeler l'iA ici aussi
 					}
 				}
 			}
@@ -297,7 +298,7 @@ public class AppliYote extends Application implements  EventHandler<MouseEvent> 
 					pionSelectionne = null;
 					if(!this.capture) 
 						this.texte.setText(this.txtJoueur[this.gestionJeu.getNoJoueurActif()-1] + this.texteSelection);
-					Situation s = new Situation();
+					Situation s = new Situation(pions, gestionJeu.getMatriceJeu());
 					
 					//situation avec grille et pion
 					//gestionJeu.creerArbreSituation
