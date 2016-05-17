@@ -252,7 +252,7 @@ private boolean jeuPossible(int i, int j, int[][]matriceS )
 		}
 		GestionJeuYote gj = new GestionJeuYote(null);
 		gj.creerArbreSituation(s, 1);
-		
+		System.out.println(s);		
 	}
 
 }
