@@ -166,7 +166,21 @@ public class Situation {
 		s.nom = nom+"."+s.nom;
 	}
 	
-	
+	public String toString(){
+		String retour="nom = "+ nom +"\n";
+		
+		for(int i=0; i < 5; i++){
+			for(int j=0; j < 6; j++){
+				retour += matriceJeu[i][j] +" ";
+			}
+			retour += "\n";
+		}
+		retour += "____________\n";
+		for(Situation sprim : successeurs){
+			retour += sprim;
+		}
+		return retour;
+	}
 
 
 }
