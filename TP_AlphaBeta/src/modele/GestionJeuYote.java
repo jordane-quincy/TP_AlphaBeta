@@ -126,7 +126,8 @@ public class GestionJeuYote {
 		{			
 			int[][] matriceS = s.getMatriceJeu();
 			DessinPion[][] lesPions = appli.getPions();
-			for(DessinPion pion : lesPions[noJoueurActif]){
+			DessinPion[] lesPionsDuJoueur = lesPions[noJoueurActif];
+			for(int k=0; k< lesPionsDuJoueur.length; k++){
 			for (int i=0; i<HEIGHT; i++)
 			{
 				for (int j=0; j<WIDTH; j++)
