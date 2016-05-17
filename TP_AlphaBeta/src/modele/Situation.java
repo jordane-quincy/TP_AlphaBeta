@@ -70,6 +70,20 @@ public class Situation {
 		max = _estMax;
 	}
 
+	/**
+	 * @return the h
+	 */
+	public double getH() {
+		return h;
+	}
+
+	/**
+	 * @param h the h to set
+	 */
+	public void setH(double h) {
+		this.h = h;
+	}
+
 	/**fonction evaluant la situation courante; calcul le 'h'*/
 	void evaluer()
 	{
