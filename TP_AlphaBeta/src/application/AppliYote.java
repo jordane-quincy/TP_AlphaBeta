@@ -298,11 +298,14 @@ public class AppliYote extends Application implements  EventHandler<MouseEvent> 
 					pionSelectionne = null;
 					if(!this.capture) 
 						this.texte.setText(this.txtJoueur[this.gestionJeu.getNoJoueurActif()-1] + this.texteSelection);
+					
+					//Gestion de l'IA
+					//situation avec grille et pion
 					Situation s = new Situation(pions, gestionJeu.getMatriceJeu());
 					
-					//situation avec grille et pion
 					//gestionJeu.creerArbreSituation
-					gestionJeu.creerArbreSituation(s, nbNiveaux);
+					gestionJeu.creerArbreSituation(s, 3);					
+					
 					//Lancer alpha beta avec racine de l'arbre renvoie valeur de la situation (h)
 					double h = GestionJeuYote.alphaBeta(s, alpha, beta);
 					//Balis l'ensemble des successeurs qui correspond au h qu'on a r�cup�r� du alpha beta (si egal prendre aux hasard)

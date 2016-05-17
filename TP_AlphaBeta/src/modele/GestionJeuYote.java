@@ -130,7 +130,7 @@ public class GestionJeuYote {
 		else
 		{			
 			int[][] matriceS = s.getMatriceJeu();
-			DessinPion[][] lesPions = appli.getPions();
+			DessinPion[][] lesPions = s.getPions();
 			DessinPion[] lesPionsDuJoueur = lesPions[noJoueurActif];
 			for(int k=0; k< lesPionsDuJoueur.length; k++){
 			for (int i=0; i<HEIGHT; i++)
@@ -233,12 +233,26 @@ private boolean jeuPossible(int i, int j, int[][]matriceS )
 	public int getNoJoueurActif() {
 		return noJoueurActif;
 	}
+		
 
 	/**
 	 * @param noJoueurActif the noJoueurActif to set
 	 */
 	public void setNoJoueurActif(int noJoueurActif) {
 		this.noJoueurActif = noJoueurActif;
+	}
+	
+	public static void main(String[] args) {
+		Situation s = new Situation(0, true);
+		for (int i = 0; i < 2; i++) {
+			for (int j = 0; j < 12; j++) {
+				DessinPion c = new DessinPion(10,10,10,i+1);
+				s.pions[i][j] = c;
+			}
+		}
+		GestionJeuYote gj = new GestionJeuYote(null);
+		gj.creerArbreSituation(s, 1);
+		
 	}
 
 }

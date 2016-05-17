@@ -52,6 +52,10 @@ public class Situation {
 	/**Pion � droite*/
 	DessinPion[][] pions;
 	
+	public DessinPion[][] getPions() {
+		return pions;
+	}
+
 	/**constructeur par defaut*/
 	public Situation()
 	{
