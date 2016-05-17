@@ -15,11 +15,11 @@ public class ChoixCouleursControleur {
 	Color colJ2;
 	/**couleur pour le fond de l'application*/
 	Color colBackground;
-	/**selecteur de couleur pour J1 d�crit dans le fichier fxml*/
+	/**selecteur de couleur pour J1 décrit dans le fichier fxml*/
 	@FXML private ColorPicker colPick1;
-	/**selecteur de couleur pour J2 d�crit dans le fichier fxml*/
+	/**selecteur de couleur pour J2 décrit dans le fichier fxml*/
 	@FXML private ColorPicker colPick2;
-	/**selecteur de couleur pour le fond d�crit dans le fichier fxml*/
+	/**selecteur de couleur pour le fond décrit dans le fichier fxml*/
 	@FXML private ColorPicker colPickBackground;
 	
 	/**petit theatre associe */

@@ -37,7 +37,7 @@ public class AppliYote extends Application implements  EventHandler<MouseEvent> 
 	int tailleCase;
 	/**Matrice des dessins des pions*/
 	DessinPion[][] pions;
-	/**Le pion en cours de s�lection*/
+	/**Le pion en cours de sélection*/
 	DessinPion pionSelectionne;
 	/**vrai si le joueur doit capturer un pion de l'adversaire*/
 	boolean capture;
@@ -47,12 +47,12 @@ public class AppliYote extends Application implements  EventHandler<MouseEvent> 
 	GestionJeuYote gestionJeu;
 	/**texte de dialogue sur l'application*/
 	Text texte;
-	/**texte pour s�lection*/
-	public String texteSelection = ", � vous de jouer, s�lectionner un pion";
+	/**texte pour sélection*/
+	public String texteSelection = ", à vous de jouer, sélectionner un pion";
 	/**texte pour pose*/
 	public String textePose= ", poser le pion";
 	/**texte pour prise*/
-	public String textePrise = ", prenez un pion � l'adersaire";
+	public String textePrise = ", prenez un pion à l'adersaire";
 	/**textes pour description joueur*/
 	public String[] txtJoueur = {"Joueur 1", "Joueur 2"};
 
@@ -64,7 +64,7 @@ public class AppliYote extends Application implements  EventHandler<MouseEvent> 
 		construirePlateauJeu(primaryStage);
 	}
 
-	/**construction du th�atre et de la sc�ne */
+	/**construction du thêatre et de la scène */
 	void construirePlateauJeu(Stage primaryStage) 
 	{
 		//definir la scene principale
@@ -93,7 +93,7 @@ public class AppliYote extends Application implements  EventHandler<MouseEvent> 
 		primaryStage.show();
 	}
 
-	/**fonction qui lance une fenetre modale d�finie en fxml par JavaFX Scene Builder
+	/**fonction qui lance une fenetre modale définie en fxml par JavaFX Scene Builder
 	 * @param primaryStage theatre de l'application*/
 	void choixCouleurs(Stage primaryStage)
 	{
@@ -122,7 +122,7 @@ public class AppliYote extends Application implements  EventHandler<MouseEvent> 
 				//creation d'un petit theatre pour la fenetre de choix de couleurs
 				Stage dialogStage = new Stage();
 
-				dialogStage.setTitle("Jeu du yot�...Couleurs...");
+				dialogStage.setTitle("Jeu du yoté...Couleurs...");
 				//fenetre modale, obligation de quitter pour revenir a la fenetre principale
 				dialogStage.initModality(Modality.WINDOW_MODAL);
 				dialogStage.initOwner(primaryStage);
@@ -313,24 +313,24 @@ public class AppliYote extends Application implements  EventHandler<MouseEvent> 
 		int x = (i+1)*this.tailleCase ;
 		int y = (j+1)*this.tailleCase ;
 		boolean found=false;
-//		System.err.println("cherche pion � supprimer en " + x + "," + y);
+//		System.err.println("cherche pion à supprimer en " + x + "," + y);
 		DessinPion pionAEliminer=null;
 		for(i=0;i<2 && !found; i++)
 			for(j=0; j<12 && !found; j++)
 			{
 				DessinPion pion = this.pions[i][j];
-//				System.err.println("trouv� pion  " + pion.getCenterX() + "," + pion.getCenterY());
+//				System.err.println("trouvé pion  " + pion.getCenterX() + "," + pion.getCenterY());
 
 				if((pion.getCenterX()  == x) && (pion.getCenterY()  == y))
 				{
-//					System.err.println("trouv� pion � supprimer " );
+//					System.err.println("trouvé pion à supprimer " );
 					found = true;
 					pionAEliminer = pion;
 				}
 			}
 		if(pionAEliminer!=null)
 		{
-//			System.err.println("trouv� pion � supprimer " + pionAEliminer);
+//			System.err.println("trouvé pion à supprimer " + pionAEliminer);
 			 eliminerPion(pionAEliminer);
 		}
 			

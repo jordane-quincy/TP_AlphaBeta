@@ -12,9 +12,9 @@ public class DessinPion extends Circle {
 	int joueur;
 	/**couleur courante du jeton*/
 	Color cj;
-	/**position du jeton dans la grille (null si non posé)*/
+	/**position du jeton dans la grille (null si non posÃ©)*/
 	Point position;
-	/**ancienne position du jeton dans la grille (null si non posé)*/
+	/**ancienne position du jeton dans la grille (null si non posÃ©)*/
 	Point anciennePosition;
 	/**couleur pour joueur 1*/
 	public static Color couleurJ1 = Color.SNOW;
@@ -48,7 +48,7 @@ public class DessinPion extends Circle {
 		getColorPion();
 	}
 
-	/**definit la bonne couleur pour le jeton en fonction du joueur et de son état sélectionné ou non
+	/**definit la bonne couleur pour le jeton en fonction du joueur et de son Ã©tat sÃ©lectionnÃ© ou non
 	*@return la couleur du jeton*/
 	public Color getColorPion()
 	{

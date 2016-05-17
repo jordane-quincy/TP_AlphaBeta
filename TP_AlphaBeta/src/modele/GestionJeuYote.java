@@ -13,7 +13,7 @@ public class GestionJeuYote {
 	static int TROPLOIN = - 2;
 	/**erreur si saut au dessus de son propre pion*/
 	static int AUTOPRISE = -3;
-	/**erreur action inverse de la derni�re action pour le joueur*/
+	/**erreur action inverse de la dernière action pour le joueur*/
 	static int RETOUR = -4;
 	/**coordonnnees incorrectes*/
 	static int IMPOSSIBLE = 0;
@@ -50,11 +50,11 @@ public class GestionJeuYote {
 		Point p = pion.getPosition();
 		
 		if(i<WIDTH && j<HEIGHT) result = (matriceJeu[i][j] == 0);
-		if(result && p!=null) // s'il s'agit d'un d�placement 
+		if(result && p!=null) // s'il s'agit d'un déplacement 
 		{
 			Point dest = new Point(i,j);
 			Point anciennePosition = pion.getAnciennePosition();
-//				System.err.println("dest = " + dest+", anciennePosition = " + anciennePosition + ", egalit� = " + dest.equals(anciennePosition));
+//				System.err.println("dest = " + dest+", anciennePosition = " + anciennePosition + ", egalité = " + dest.equals(anciennePosition));
 			if(dest.equals(anciennePosition)) result = false;
 			if(result)
 			{

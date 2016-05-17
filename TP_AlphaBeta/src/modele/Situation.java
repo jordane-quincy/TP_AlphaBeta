@@ -33,8 +33,8 @@ public class Situation {
 	/**indique si l'etat/la situation est une feuille de l'arbre*/
 	private boolean feuille;
 
-	/**indique si l'etat/la situation est une feuille définitive de l'arbre
-	 * (i.e. impossible de créer des successeurs a cette situation)*/
+	/**indique si l'etat/la situation est une feuille dÃ©finitive de l'arbre
+	 * (i.e. impossible de crÃ©er des successeurs a cette situation)*/
 	private boolean close;
 
 	/**h = heuristique, estimation de la valeur de la situation*/
@@ -76,8 +76,8 @@ public class Situation {
 		double eval = 0d;
 		double coefSituation = (this.max?-1:1);
 		//les valeurs positives sont pour l'IA
-		// et sont diminuées si le jeu suivant est pour l'humain
-		//elles sont augmentées sinon
+		// et sont diminuÃ©es si le jeu suivant est pour l'humain
+		//elles sont augmentÃ©es sinon
 		double valeur = dangerPossibles();
 		valeur += 0.1*coefSituation*Math.abs(valeur);
 		eval+=valeur;
