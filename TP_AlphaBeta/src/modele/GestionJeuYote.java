@@ -114,7 +114,7 @@ public class GestionJeuYote {
 	/**cree un arbre de situation sur 2 nbNiveaux a partir de la situation du jeu courant
 	 * @param s situation a partir de laquelle il faut etendre l'arbre
 	 * @param nbNiveaux nb de niveaux de l'arbre restants a creer*/
-	void creerArbreSituation(Situation s, int nbNiveaux)
+	public void creerArbreSituation(Situation s, int nbNiveaux)
 	{
 //		if (s.troisPionsAlignes( ) || s.isFull()) s.setClose(true);
 		if(nbNiveaux==0) s.setFeuille(true);		

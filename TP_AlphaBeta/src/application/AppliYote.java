@@ -301,10 +301,12 @@ public class AppliYote extends Application implements  EventHandler<MouseEvent> 
 					
 					//situation avec grille et pion
 					//gestionJeu.creerArbreSituation
+					gestionJeu.creerArbreSituation(s, nbNiveaux);
 					//Lancer alpha beta avec racine de l'arbre renvoie valeur de la situation (h)
-					//Balis l'ensemble des successeurs qui correspond au h qu'on a récupéré du alpha beta (si egal prendre aux hasard)
-					//dans cette situation on doit savoir quel pion modifié (possition)
-					//et renvoyer ça à l'interface
+					double h = GestionJeuYote.alphaBeta(s, alpha, beta);
+					//Balis l'ensemble des successeurs qui correspond au h qu'on a rï¿½cupï¿½rï¿½ du alpha beta (si egal prendre aux hasard)
+					//dans cette situation on doit savoir quel pion modifiï¿½ (possition)
+					//et renvoyer ï¿½a ï¿½ l'interface
 					//et faire l'annimation
 				}
 				
