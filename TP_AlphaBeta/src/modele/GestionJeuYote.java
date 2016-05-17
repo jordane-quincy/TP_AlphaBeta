@@ -125,12 +125,15 @@ public class GestionJeuYote {
 		else
 		{			
 			int[][] matriceS = s.getMatriceJeu();
+			DessinPion[][] lesPions = appli.getPions();
+			
 			for (int i=0; i<HEIGHT; i++)
 			{
 				for (int j=0; j<WIDTH; j++)
 				{
 					if (jeuPossible(i, j,matriceS ))
 					{
+						//if (!s.isCapture)
 						Situation sprim = new Situation(0, !s.isMax());
 						int[][] matriceJeuDeduite = new int[HEIGHT][WIDTH];
 						copieMatrice(matriceS, matriceJeuDeduite);
@@ -138,10 +141,13 @@ public class GestionJeuYote {
 						matriceJeuDeduite[i][j] = tj.getType();
 						DessinPion[][] lesPionsDeduits = new DessinPion[2][12];
 						copiePions(lesPions, lesPionsDeduits);
-						
+						DessinPion lePionModifie = lesPionsDeduits[noJoueurActif][k];
+						lePionModifie.setPosition(new Point(i,j));
+						sprim.setMatriceJeu(matriceJeuDeduite);
 						sprim.setColumn(j);
 						sprim.setLine(i);
 						sprim.setMatriceJeu(matriceJeuDeduite);
+						sprim.setPions(lesPionsDeduits);
 						s.addSuccesseur(sprim);
 						creerArbreSituation( sprim, nbNiveaux-1);
 					}
