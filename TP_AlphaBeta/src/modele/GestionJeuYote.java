@@ -126,7 +126,7 @@ public class GestionJeuYote {
 		{			
 			int[][] matriceS = s.getMatriceJeu();
 			DessinPion[][] lesPions = appli.getPions();
-			
+			for(DessinPion pion : lesPions[noJoueurActif]){
 			for (int i=0; i<HEIGHT; i++)
 			{
 				for (int j=0; j<WIDTH; j++)
@@ -152,6 +152,7 @@ public class GestionJeuYote {
 						creerArbreSituation( sprim, nbNiveaux-1);
 					}
 				}
+			}
 			}
 		}
 	}
