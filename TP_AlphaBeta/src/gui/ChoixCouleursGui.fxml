@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="content" minHeight="300" minWidth="250" prefHeight="300.0" prefWidth="300.0" style="-: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ChoixCouleursControleur">
+   <children>
+      <VBox layoutX="-100.0" layoutY="-177.0" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox spacing="10.0">
+               <children>
+                  <Label minWidth="-Infinity" text="Couleur J1">
+                     <effect>
+                        <DropShadow />
+                     </effect></Label>
+                  <ColorPicker fx:id="colPick1" editable="true" onAction="#choixCouleurJ1" promptText="couleur Joueur 1">
+                     <effect>
+                        <Reflection />
+                     </effect></ColorPicker>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox spacing="10.0">
+               <children>
+                  <Label minWidth="-Infinity" text="Couleur J2">
+                     <effect>
+                        <DropShadow />
+                     </effect></Label>
+                  <ColorPicker fx:id="colPick2" editable="true" onAction="#choixCouleurJ2" promptText="couleur Joueur 2">
+                     <effect>
+                        <Reflection />
+                     </effect></ColorPicker>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox spacing="10.0">
+               <children>
+                  <Label minWidth="-Infinity" text="Arrière plan">
+                     <effect>
+                        <DropShadow />
+                     </effect></Label>
+                  <ColorPicker fx:id="colPickBackground" onAction="#choixCouleurBackground" promptText="couleur arrière plan">
+                     <effect>
+                        <Reflection />
+                     </effect></ColorPicker>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#gestionBoutonGo" text="Ok" />
+                  <Button mnemonicParsing="false" onAction="#gestionBoutonCancel" text="Annuler" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
