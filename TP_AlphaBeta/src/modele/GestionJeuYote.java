@@ -101,7 +101,13 @@ public class GestionJeuYote {
 		if((i>=0 && j>=0) && (i<WIDTH && j<HEIGHT)) matriceJeu[i][j]  = 0;
 	}
 	
-	
+	void copiePions(DessinPion[][] from, DessinPion[][] to) {
+		for (int i = 0; i < 2; i++) {
+			for (int j =0; j < 12; j++) {
+				to[i][j] = from[i][j].clone();
+			}
+		}
+	}
 	
 
 	/**cree un arbre de situation sur 2 nbNiveaux a partir de la situation du jeu courant
@@ -130,6 +136,9 @@ public class GestionJeuYote {
 						copieMatrice(matriceS, matriceJeuDeduite);
 						TypeJoueur tj = (s.isMax()?TypeJoueur.MACHINE:TypeJoueur.JOUEUR);
 						matriceJeuDeduite[i][j] = tj.getType();
+						DessinPion[][] lesPionsDeduits = new DessinPion[2][12];
+						copiePions(lesPions, lesPionsDeduits);
+						
 						sprim.setColumn(j);
 						sprim.setLine(i);
 						sprim.setMatriceJeu(matriceJeuDeduite);

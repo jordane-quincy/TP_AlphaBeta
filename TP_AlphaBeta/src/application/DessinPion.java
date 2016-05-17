@@ -5,7 +5,7 @@ import java.awt.Point;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-public class DessinPion extends Circle {
+public class DessinPion extends Circle implements Cloneable {
 	/**vrai si le jeton est actuellement selectionne*/
 	boolean selected;
 	/**numero du joueur associe*/
