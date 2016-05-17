@@ -247,7 +247,7 @@ public class AppliYote extends Application implements  EventHandler<MouseEvent> 
 						if(pionSelectionne==null) 
 						{
 							pionSelectionne=d;
-							this.texte.setText(this.txtJoueur[this.gestionJeu.getNoJoueurActif()-1] + this.textePose);;
+							this.texte.setText(this.txtJoueur[this.gestionJeu.getNoJoueurActif()-1] + this.textePose);
 						}
 						else 
 						{
@@ -274,7 +274,7 @@ public class AppliYote extends Application implements  EventHandler<MouseEvent> 
 					retireDernierJeu(pionSelectionne);
 					double translateX =  x - pionSelectionne.getCenterX() + demiCase;
 					double translateY =  y - pionSelectionne.getCenterY() + demiCase;
-					int tps =(int)(300 * ((Math.abs(translateX) + Math.abs(translateY) ) /  tailleCase));
+					int tps =(int)(100 * ((Math.abs(translateX) + Math.abs(translateY) ) /  tailleCase));
 //					if(tps<1000) tps = 1000;
 					pionSelectionne.switchSelected();
 					Timeline timeline = new Timeline();
