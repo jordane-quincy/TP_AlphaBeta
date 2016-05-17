@@ -1,0 +1,7 @@
+Clic droit sur le projet eclipse :
+Build Path -> onglet Libraries
+	Aller sur la lib de la jre et sur la ligne Access Rules faire Edit :
+		sur Access Rules -> Edit puis Add
+			Selectionner Accessible
+			et saisir :
+			javafx/**
