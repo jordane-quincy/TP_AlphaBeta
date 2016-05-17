@@ -37,6 +37,13 @@ public class AppliYote extends Application implements  EventHandler<MouseEvent> 
 	int tailleCase;
 	/**Matrice des dessins des pions*/
 	DessinPion[][] pions;
+	/**
+	 * @return the pions
+	 */
+	public DessinPion[][] getPions() {
+		return pions;
+	}
+
 	/**Le pion en cours de sélection*/
 	DessinPion pionSelectionne;
 	/**vrai si le joueur doit capturer un pion de l'adversaire*/
