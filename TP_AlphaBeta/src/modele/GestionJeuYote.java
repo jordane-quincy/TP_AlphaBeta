@@ -132,7 +132,8 @@ public class GestionJeuYote {
 			{
 				for (int j=0; j<WIDTH; j++)
 				{
-					if (jeuPossible(i, j,matriceS ))
+					//if (jeuPossible(i,j,matriceS))
+					if (isPosePossible(lesPionsDuJoueur[k],i, j))
 					{
 						//if (!s.isCapture)
 						Situation sprim = new Situation(0, !s.isMax());

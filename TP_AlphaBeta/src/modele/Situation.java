@@ -2,6 +2,8 @@ package modele;
 
 import java.util.ArrayList;
 
+import application.DessinPion;
+
 public class Situation {
 
 	/**nom de la situation*/
@@ -42,7 +44,10 @@ public class Situation {
 
 	/**grille de jeu correspondant a la situation*/
 	private int[][] matriceJeu;
-
+	
+	/**Pion à droite*/
+	DessinPion[][] pions;
+	
 	/**constructeur par defaut*/
 	public Situation()
 	{
@@ -51,6 +56,11 @@ public class Situation {
 		h = 0;
 		matriceJeu = new int[5][6];
 		successeurs = new ArrayList<>();
+		pions = new DessinPion[2][12];
+	}
+
+	public void setPions(DessinPion[][] pions) {
+		this.pions = pions;
 	}
 
 	/**constructeur initialisant l'estimation h 
