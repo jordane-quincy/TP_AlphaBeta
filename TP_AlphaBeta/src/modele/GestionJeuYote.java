@@ -1,6 +1,7 @@
 package modele;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 import application.AppliYote;
 import application.DessinPion;
@@ -157,6 +158,52 @@ public class GestionJeuYote {
 			}
 			}
 		}
+	}
+	
+	/**fonction alphabeta, determine la valeur du noeud/ de la situation s
+	 * pour recuperer la situation a prendre, balayer ensuite la liste des successeurs de s 
+	 * et prendre la premiere situation ayant la meme estimation
+	 * @param s situation, etat 
+	 * @param alpha borne minimum
+	 * @param beta borne maximum
+	 * @return estimation de la situation s en fonction du jeu de l'adversaire*/
+	public static double  alphaBeta(Situation s , double alpha, double beta) 
+	{
+	  double  borne, val, ab;
+	  if (s.isFeuille() || s.isClose())
+	  {
+	    s.evaluer();
+	    return s.getH();
+	  }
+	  if (s.isMax())
+	  {
+	    ArrayList<Situation> successeurs = s.getSuccesseurs();
+	    val = -Double.MAX_VALUE;
+	    borne = alpha;
+	    for (Situation suc:successeurs)
+	    {
+	      ab = alphaBeta(suc, borne, beta);
+	      suc.setH(ab);
+	      val = (val>ab?val:ab);
+	      if (val>=beta) return val;
+	      if (val>borne) borne = val;
+	    }
+	  }
+	  else
+	  {
+	    ArrayList<Situation> successeurs = s.getSuccesseurs();
+	    val = Double.MAX_VALUE;
+	    borne = beta;
+	    for (Situation suc:successeurs)
+	    {
+	      ab = alphaBeta(suc, borne, beta);
+	      suc.setH(ab);
+	      val = (val<ab?val:ab);
+	      if (val<=alpha) return val;
+	      if (val<borne) borne = val;
+	    }
+	  }
+	  return borne;                 
 	}
 
 	//TODO: completer la fonction

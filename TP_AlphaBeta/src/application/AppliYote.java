@@ -5,6 +5,7 @@ import gui.ChoixCouleursControleur;
 import java.net.URL;
 
 import modele.GestionJeuYote;
+import modele.Situation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -296,8 +297,17 @@ public class AppliYote extends Application implements  EventHandler<MouseEvent> 
 					pionSelectionne = null;
 					if(!this.capture) 
 						this.texte.setText(this.txtJoueur[this.gestionJeu.getNoJoueurActif()-1] + this.texteSelection);
-
+					Situation s = new Situation();
+					
+					//situation avec grille et pion
+					//gestionJeu.creerArbreSituation
+					//Lancer alpha beta avec racine de l'arbre renvoie valeur de la situation (h)
+					//Balis l'ensemble des successeurs qui correspond au h qu'on a récupéré du alpha beta (si egal prendre aux hasard)
+					//dans cette situation on doit savoir quel pion modifié (possition)
+					//et renvoyer ça à l'interface
+					//et faire l'annimation
 				}
+				
 			}
 	}
 	

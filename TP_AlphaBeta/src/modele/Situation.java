@@ -32,6 +32,10 @@ public class Situation {
 	/** liste des etats accessibles a partir de l'etat courant*/
 	private ArrayList<Situation> successeurs;
 
+	public ArrayList<Situation> getSuccesseurs() {
+		return successeurs;
+	}
+
 	/**indique si l'etat/la situation est une feuille de l'arbre*/
 	private boolean feuille;
 
