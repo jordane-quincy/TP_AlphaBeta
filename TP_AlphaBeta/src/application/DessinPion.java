@@ -98,4 +98,16 @@ public class DessinPion extends Circle implements Cloneable {
 		this.anciennePosition = anciennePosition;
 	}
 	
+	@Override
+	public DessinPion clone(){
+		DessinPion p = null;
+		try{
+			p = (DessinPion) super.clone();
+		}catch(Exception e){
+			System.err.println("Impossible de cloner DessinPion !");
+			e.printStackTrace();
+		}
+		
+		return p;
+	}
 }
