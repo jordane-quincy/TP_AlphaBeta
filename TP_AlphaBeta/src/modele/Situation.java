@@ -49,7 +49,7 @@ public class Situation {
 	/**grille de jeu correspondant a la situation*/
 	private int[][] matriceJeu;
 	
-	/**Pion à droite*/
+	/**Pion ï¿½ droite*/
 	DessinPion[][] pions;
 	
 	/**constructeur par defaut*/
@@ -82,6 +82,12 @@ public class Situation {
 	{
 		this(_h);
 		max = _estMax;
+	}
+
+	public Situation(DessinPion[][] pions, int[][] matriceJeu) {
+		super();
+		this.pions = pions;
+		this.matriceJeu = matriceJeu;
 	}
 
 	/**
