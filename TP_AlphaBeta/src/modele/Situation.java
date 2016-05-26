@@ -150,7 +150,6 @@ public class Situation {
 		double valeur = dangerPossibles();
 		valeur += 0.1*coefSituation*Math.abs(valeur);
 		eval+=valeur;
-
 		h = eval;
 		//		afficheMatrice();
 	}

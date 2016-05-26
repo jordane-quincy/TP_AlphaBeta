@@ -90,6 +90,26 @@ public class GestionJeuYote {
 		Point p = pion.getPosition();
 		
 		if(i<WIDTH && j<HEIGHT) result = (matriceJeu[i][j] == 0);
+		if(result && p!=null) // s'il s'agit d'un déplacement 
+		{
+			Point dest = new Point(i,j);
+			Point anciennePosition = pion.getAnciennePosition();
+//				System.err.println("dest = " + dest+", anciennePosition = " + anciennePosition + ", egalité = " + dest.equals(anciennePosition));
+			if(dest.equals(anciennePosition)) result = false;
+			if(result)
+			{
+				double d = dest.distance(p);
+				if((d>1 && d<2) || d>2) result = false;
+				if(d==2)
+				{
+					int difX = (dest.x - p.x)/2;
+					int difY = (dest.y - p.y)/2;
+					Point intermediaire = new Point(p.x + difX, p.y + difY);
+					int contenuCaseIntermediaire = matriceJeu[intermediaire.x][intermediaire.y] ;
+					if(contenuCaseIntermediaire== pion.getJoueur() || contenuCaseIntermediaire == 0) result = false;
+				}
+			}
+		}
 		return result;
 	}
 	
@@ -223,19 +243,7 @@ public class GestionJeuYote {
 	//TODO: completer la fonction
 	private boolean jeuPossible(int i, int j, DessinPion pion)
 	{
-		//On peut uniquement se déplacer de haut en bas et de gauche à droite (on ne peut pas de déplacer en diagonale)
-		if (pion.getPosition() == null) {
-			return true;
-		}
-		System.out.println("test");
-		int oldPositionX = pion.getPosition().x;
-		int oldPositionY = pion.getPosition().y;
-		int diffX = Math.abs(oldPositionX - i);
-		int diffY = Math.abs(oldPositionY - j);
-		if (diffX > 1 || diffY > 1 || (diffX == 1 && diffY == 1)) {
-			return false;
-		}
-		System.out.println(oldPositionX + " / " + i + ", " + oldPositionY + " / " + j);
+		/*fin du jeu*/
 		return true;
 	}
 

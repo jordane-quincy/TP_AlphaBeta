@@ -319,35 +319,43 @@ public class AppliYote extends Application implements  EventHandler<MouseEvent> 
 		double h = GestionJeuYote.alphaBeta(s, -Double.MAX_VALUE, Double.MAX_VALUE);
 		System.out.println(h);
 		//Récuération de la situation correspondant au h
-		Situation situationToPlay = GestionJeuYote.getSituation(h, s);
-		System.out.println(situationToPlay);
-		//Une fois la situatio récupérée, on doit faire l'annimation de celle-ci
-		//On récupère le pion modifié depuis la situation
-		//Et on change en suite le véritable pion grâce à l'index
-		DessinPion modifiedPion = situationToPlay.getModifiedPion();
-		int i = situationToPlay.getColumn();
-		int j = situationToPlay.getLine();
-		modifiedPion = pions[this.gestionJeu.getNoJoueurActif()-1][situationToPlay.getIndex()];
-		if(gestionJeu.isPosePossible(modifiedPion, i, j)) {
-			gestionJeu.poseJeton(modifiedPion, i, j);
-			retireDernierJeu(modifiedPion);
-			//On récupère le x et y du rectangle grâce aux  i et j
-			int x = (i * tailleCase) + demiCase;
-			int y = (j * tailleCase) + demiCase;
-			double translateXBis =  x - modifiedPion.getCenterX() + demiCase;
-			double translateYBis =  y - modifiedPion.getCenterY() + demiCase;
-			int tpsBis =(int)(100 * ((Math.abs(translateXBis) + Math.abs(translateYBis) ) /  tailleCase));
-//			if(tps<1000) tps = 1000;
-			Timeline timelineBis = new Timeline();
-			timelineBis.getKeyFrames().addAll(
-					new KeyFrame(new Duration(tpsBis), 
-							new KeyValue(modifiedPion.centerXProperty(), x  + demiCase),
-							new KeyValue(modifiedPion.centerYProperty(), y  + demiCase)										)
-					);
-			timelineBis.play();
-			if(!this.capture) 
-				this.texte.setText(this.txtJoueur[this.gestionJeu.getNoJoueurActif()-1] + this.texteSelection);
+		if(s.getSuccesseurs().size() > 0){
+			Situation situationToPlay = GestionJeuYote.getSituation(h, s);
+			System.out.println(situationToPlay);
+			//Une fois la situatio récupérée, on doit faire l'annimation de celle-ci
+			//On récupère le pion modifié depuis la situation
+			//Et on change en suite le véritable pion grâce à l'index
+			DessinPion modifiedPion = situationToPlay.getModifiedPion();
+			int i = situationToPlay.getColumn();
+			int j = situationToPlay.getLine();
+			modifiedPion = pions[this.gestionJeu.getNoJoueurActif()-1][situationToPlay.getIndex()];
+			if(gestionJeu.isPosePossible(modifiedPion, i, j)) {
+				gestionJeu.poseJeton(modifiedPion, i, j);
+				retireDernierJeu(modifiedPion);
+				//On récupère le x et y du rectangle grâce aux  i et j
+				int x = (i * tailleCase) + demiCase;
+				int y = (j * tailleCase) + demiCase;
+				double translateXBis =  x - modifiedPion.getCenterX() + demiCase;
+				double translateYBis =  y - modifiedPion.getCenterY() + demiCase;
+				int tpsBis =(int)(100 * ((Math.abs(translateXBis) + Math.abs(translateYBis) ) /  tailleCase));
+//				if(tps<1000) tps = 1000;
+				Timeline timelineBis = new Timeline();
+				timelineBis.getKeyFrames().addAll(
+						new KeyFrame(new Duration(tpsBis), 
+								new KeyValue(modifiedPion.centerXProperty(), x  + demiCase),
+								new KeyValue(modifiedPion.centerYProperty(), y  + demiCase)										)
+						);
+				timelineBis.play();
+				if(!this.capture) 
+					this.texte.setText(this.txtJoueur[this.gestionJeu.getNoJoueurActif()-1] + this.texteSelection);
+			}
 		}
+		else {
+			System.out.println("Joueur 1 Win");
+			this.texte.setText("Joueur 1 win");
+		}
+		
+		
 	}
 	
 	/**retire le derniers jeux pour le joueur du pion pion, sauf pour ce pion 
