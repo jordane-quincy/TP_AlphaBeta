@@ -313,15 +313,14 @@ public class AppliYote extends Application implements  EventHandler<MouseEvent> 
 		
 		//gestionJeu.creerArbreSituation
 		gestionJeu.creerArbreSituation(s, 1);					
-		//System.out.println("test");
 		//Lancer alpha beta avec racine de l'arbre renvoie valeur de la situation (h)
 		double h = GestionJeuYote.alphaBeta(s, -Double.MAX_VALUE, Double.MAX_VALUE);
 		System.out.println(h);
-		//Récuération de la situation correspondant au h
+		//Récupération de la situation correspondant au h
 		if(s.getSuccesseurs().size() > 0){
 			Situation situationToPlay = GestionJeuYote.getSituation(h, s);
 			System.out.println(situationToPlay);
-			//Une fois la situatio récupérée, on doit faire l'annimation de celle-ci
+			//Une fois la situation récupérée, on doit faire l'annimation de celle-ci
 			//On récupère le pion modifié depuis la situation
 			//Et on change en suite le véritable pion grâce à l'index
 			DessinPion modifiedPion = situationToPlay.getModifiedPion();
