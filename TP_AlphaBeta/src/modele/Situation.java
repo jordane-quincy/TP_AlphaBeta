@@ -17,9 +17,17 @@ public class Situation {
 
 	/**no de ligne*/
 	private int line;
+	public int getLine() {
+		return line;
+	}
+
 	/**no de colonne*/
 	private int column;
 	
+	public int getColumn() {
+		return column;
+	}
+
 	/**nb pions restant adversaire*/
 	private int nbPionsRestantAdversaire;
 
@@ -52,6 +60,19 @@ public class Situation {
 	/**Pion � droite*/
 	DessinPion[][] pions;
 	
+	int index;
+	
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
+	}
+
+	/*Pion modifié*/
+	DessinPion modifiedPion;
+	
 	public DessinPion[][] getPions() {
 		return pions;
 	}
@@ -65,6 +86,15 @@ public class Situation {
 		matriceJeu = new int[6][5];
 		successeurs = new ArrayList<>();
 		pions = new DessinPion[2][12];
+		modifiedPion = null;
+	}
+
+	public DessinPion getModifiedPion() {
+		return modifiedPion;
+	}
+
+	public void setModifiedPion(DessinPion modifiedPion) {
+		this.modifiedPion = modifiedPion;
 	}
 
 	public void setPions(DessinPion[][] pions) {
@@ -172,7 +202,7 @@ public class Situation {
 	}
 	
 	public String toString(){
-		String retour="nom = "+ nom +"\nh = " + h + "\n";
+		String retour="nom = "+ nom +"\nh = " + h + "\ncolumn : " + column + "\nligne : " + line + "\n";
 		
 		for(int i=0; i < 6; i++){
 			for(int j=0; j < 5; j++){

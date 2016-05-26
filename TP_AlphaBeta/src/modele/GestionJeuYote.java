@@ -85,6 +85,15 @@ public class GestionJeuYote {
 		return result;
 	}
 	
+	public boolean isPosePossibleForArbre(DessinPion pion, int i, int j) {
+		boolean result = false;
+		Point p = pion.getPosition();
+		
+		if(i<WIDTH && j<HEIGHT) result = (matriceJeu[i][j] == 0);
+		return result;
+	}
+	
+	
 	public void poseJeton(DessinPion pion, int i, int j)
 	{
 		Point p =pion.getPosition();
@@ -133,33 +142,34 @@ public class GestionJeuYote {
 			DessinPion[][] lesPions = s.getPions();
 			DessinPion[] lesPionsDuJoueur = lesPions[noJoueurActif - 1];
 			for(int k=0; k< lesPionsDuJoueur.length; k++){
-			for (int i=0; i<WIDTH; i++)
-			{
-				for (int j=0; j<HEIGHT; j++)
+				for (int i=0; i<WIDTH; i++)
 				{
-					//if (jeuPossible(i,j,matriceS))
-					if (isPosePossible(lesPionsDuJoueur[k],i, j))
+					for (int j=0; j<HEIGHT; j++)
 					{
-						//if (!s.isCapture)
-						Situation sprim = new Situation(0, !s.isMax());
-						int[][] matriceJeuDeduite = new int[WIDTH][HEIGHT];
-						copieMatrice(matriceS, matriceJeuDeduite);
-						TypeJoueur tj = (s.isMax()?TypeJoueur.MACHINE:TypeJoueur.JOUEUR);
-						matriceJeuDeduite[i][j] = tj.getType();
 						DessinPion[][] lesPionsDeduits = new DessinPion[2][12];
 						copiePions(lesPions, lesPionsDeduits);
-						DessinPion lePionModifie = lesPionsDeduits[noJoueurActif - 1][k];
-						lePionModifie.setPosition(new Point(i,j));
-						sprim.setMatriceJeu(matriceJeuDeduite);
-						sprim.setColumn(j);
-						sprim.setLine(i);
-						sprim.setMatriceJeu(matriceJeuDeduite);
-						sprim.setPions(lesPionsDeduits);
-						s.addSuccesseur(sprim);
-						creerArbreSituation(sprim, nbNiveaux-1);
+						DessinPion lePionModifie = lesPionsDeduits[noJoueurActif - 1][k];	
+						if (jeuPossible(i,j,lePionModifie) && isPosePossibleForArbre(lesPionsDuJoueur[k],i, j))
+						{
+							//if (!s.isCapture)
+							Situation sprim = new Situation(0, !s.isMax());
+							int[][] matriceJeuDeduite = new int[WIDTH][HEIGHT];
+							copieMatrice(matriceS, matriceJeuDeduite);
+							TypeJoueur tj = (s.isMax()?TypeJoueur.MACHINE:TypeJoueur.JOUEUR);
+							matriceJeuDeduite[i][j] = tj.getType();
+							lePionModifie.setPosition(new Point(i,j));
+							sprim.setMatriceJeu(matriceJeuDeduite);
+							sprim.setColumn(i);
+							sprim.setModifiedPion(lePionModifie);
+							sprim.setLine(j);
+							sprim.setMatriceJeu(matriceJeuDeduite);
+							sprim.setPions(lesPionsDeduits);
+							sprim.setIndex(k);
+							s.addSuccesseur(sprim);
+							creerArbreSituation(sprim, nbNiveaux-1);
+						}
 					}
 				}
-			}
 			}
 		}
 	}
@@ -211,8 +221,23 @@ public class GestionJeuYote {
 	}
 
 	//TODO: completer la fonction
-private boolean jeuPossible(int i, int j, int[][]matriceS )
-{return false;}
+	private boolean jeuPossible(int i, int j, DessinPion pion)
+	{
+		//On peut uniquement se déplacer de haut en bas et de gauche à droite (on ne peut pas de déplacer en diagonale)
+		if (pion.getPosition() == null) {
+			return true;
+		}
+		System.out.println("test");
+		int oldPositionX = pion.getPosition().x;
+		int oldPositionY = pion.getPosition().y;
+		int diffX = Math.abs(oldPositionX - i);
+		int diffY = Math.abs(oldPositionY - j);
+		if (diffX > 1 || diffY > 1 || (diffX == 1 && diffY == 1)) {
+			return false;
+		}
+		System.out.println(oldPositionX + " / " + i + ", " + oldPositionY + " / " + j);
+		return true;
+	}
 
 	/**fonction de recopie de la matrice de jeu 6x5
 	 * @param from matrice a recopier
@@ -253,6 +278,21 @@ private boolean jeuPossible(int i, int j, int[][]matriceS )
 		GestionJeuYote gj = new GestionJeuYote(null);
 		gj.creerArbreSituation(s, 1);
 		System.out.println(s);		
+	}
+
+	public static Situation getSituation(double h, Situation s) {
+		//On va récupérer toutes les situations possibles ayant le même h que celui donné en argument
+		//Puis on choisira au hasard une des situations
+		ArrayList<Integer> indexPossible = new ArrayList<Integer>();
+		for (int i = 0; i < s.getSuccesseurs().size(); i++) {
+			if (s.getSuccesseurs().get(i).getH() == h) {
+				indexPossible.add(i);
+			}
+		}
+		int randomNumber = (int)(Math.random()*indexPossible.size());
+		
+		return s.getSuccesseurs().get(indexPossible.get(randomNumber));
+		
 	}
 
 }
