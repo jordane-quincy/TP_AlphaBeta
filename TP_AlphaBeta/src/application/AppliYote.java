@@ -304,10 +304,11 @@ public class AppliYote extends Application implements  EventHandler<MouseEvent> 
 					Situation s = new Situation(pions, gestionJeu.getMatriceJeu());
 					
 					//gestionJeu.creerArbreSituation
-					gestionJeu.creerArbreSituation(s, 3);					
-					
+					gestionJeu.creerArbreSituation(s, 2);					
+					System.out.println("test");
 					//Lancer alpha beta avec racine de l'arbre renvoie valeur de la situation (h)
-					double h = GestionJeuYote.alphaBeta(s, alpha, beta);
+					double h = GestionJeuYote.alphaBeta(s, -Double.MAX_VALUE, Double.MAX_VALUE);
+					System.out.println(h);
 					//Balis l'ensemble des successeurs qui correspond au h qu'on a r�cup�r� du alpha beta (si egal prendre aux hasard)
 					//dans cette situation on doit savoir quel pion modifi� (possition)
 					//et renvoyer �a � l'interface

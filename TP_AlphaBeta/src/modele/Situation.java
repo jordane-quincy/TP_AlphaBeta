@@ -62,7 +62,7 @@ public class Situation {
 		noInstances = nbInstances++;
 		nom=""+noInstances;
 		h = 0;
-		matriceJeu = new int[5][6];
+		matriceJeu = new int[6][5];
 		successeurs = new ArrayList<>();
 		pions = new DessinPion[2][12];
 	}
@@ -92,6 +92,7 @@ public class Situation {
 		super();
 		this.pions = pions;
 		this.matriceJeu = matriceJeu;
+		successeurs = new ArrayList<>();
 	}
 
 	/**
@@ -171,10 +172,10 @@ public class Situation {
 	}
 	
 	public String toString(){
-		String retour="nom = "+ nom +"\n";
+		String retour="nom = "+ nom +"\nh = " + h + "\n";
 		
-		for(int i=0; i < 5; i++){
-			for(int j=0; j < 6; j++){
+		for(int i=0; i < 6; i++){
+			for(int j=0; j < 5; j++){
 				retour += matriceJeu[i][j] +" ";
 			}
 			retour += "\n";

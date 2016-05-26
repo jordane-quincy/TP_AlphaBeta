@@ -131,24 +131,24 @@ public class GestionJeuYote {
 		{			
 			int[][] matriceS = s.getMatriceJeu();
 			DessinPion[][] lesPions = s.getPions();
-			DessinPion[] lesPionsDuJoueur = lesPions[noJoueurActif];
+			DessinPion[] lesPionsDuJoueur = lesPions[noJoueurActif - 1];
 			for(int k=0; k< lesPionsDuJoueur.length; k++){
-			for (int i=0; i<HEIGHT; i++)
+			for (int i=0; i<WIDTH; i++)
 			{
-				for (int j=0; j<WIDTH; j++)
+				for (int j=0; j<HEIGHT; j++)
 				{
 					//if (jeuPossible(i,j,matriceS))
 					if (isPosePossible(lesPionsDuJoueur[k],i, j))
 					{
 						//if (!s.isCapture)
 						Situation sprim = new Situation(0, !s.isMax());
-						int[][] matriceJeuDeduite = new int[HEIGHT][WIDTH];
+						int[][] matriceJeuDeduite = new int[WIDTH][HEIGHT];
 						copieMatrice(matriceS, matriceJeuDeduite);
 						TypeJoueur tj = (s.isMax()?TypeJoueur.MACHINE:TypeJoueur.JOUEUR);
 						matriceJeuDeduite[i][j] = tj.getType();
 						DessinPion[][] lesPionsDeduits = new DessinPion[2][12];
 						copiePions(lesPions, lesPionsDeduits);
-						DessinPion lePionModifie = lesPionsDeduits[noJoueurActif][k];
+						DessinPion lePionModifie = lesPionsDeduits[noJoueurActif - 1][k];
 						lePionModifie.setPosition(new Point(i,j));
 						sprim.setMatriceJeu(matriceJeuDeduite);
 						sprim.setColumn(j);
@@ -156,7 +156,7 @@ public class GestionJeuYote {
 						sprim.setMatriceJeu(matriceJeuDeduite);
 						sprim.setPions(lesPionsDeduits);
 						s.addSuccesseur(sprim);
-						creerArbreSituation( sprim, nbNiveaux-1);
+						creerArbreSituation(sprim, nbNiveaux-1);
 					}
 				}
 			}
@@ -219,8 +219,8 @@ private boolean jeuPossible(int i, int j, int[][]matriceS )
 	 * @param to matrice recopiee*/
 	private void copieMatrice(int [][]from, int[][]to)
 	{
-		for(int i=0; i<HEIGHT; i++)
-			System.arraycopy(from[i], 0, to[i], 0, WIDTH);
+		for(int i=0; i<WIDTH; i++)
+			System.arraycopy(from[i], 0, to[i], 0, HEIGHT);
 	}
 	public void switchJoueur()
 	{
