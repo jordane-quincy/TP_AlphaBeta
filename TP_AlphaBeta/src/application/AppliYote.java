@@ -6,7 +6,6 @@ import java.net.URL;
 
 import modele.GestionJeuYote;
 import modele.Situation;
-import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;

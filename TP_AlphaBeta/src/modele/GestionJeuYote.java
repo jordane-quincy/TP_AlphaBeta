@@ -161,6 +161,7 @@ public class GestionJeuYote {
 			int[][] matriceS = s.getMatriceJeu();
 			DessinPion[][] lesPions = s.getPions();
 			DessinPion[] lesPionsDuJoueur = lesPions[noJoueurActif - 1];
+			int nbPionsJoueurInactifs = 0;
 			for(int k=0; k< lesPionsDuJoueur.length; k++){
 				for (int i=0; i<WIDTH; i++)
 				{
@@ -168,7 +169,10 @@ public class GestionJeuYote {
 					{
 						DessinPion[][] lesPionsDeduits = new DessinPion[2][12];
 						copiePions(lesPions, lesPionsDeduits);
-						DessinPion lePionModifie = lesPionsDeduits[noJoueurActif - 1][k];	
+						DessinPion lePionModifie = lesPionsDeduits[noJoueurActif - 1][k];
+						if(! lePionModifie.isVisible()){
+							nbPionsJoueurInactifs++;
+						}
 						if (jeuPossible(i,j,lePionModifie) && isPosePossibleForArbre(lesPionsDuJoueur[k],i, j))
 						{
 							//if (!s.isCapture)
@@ -190,6 +194,12 @@ public class GestionJeuYote {
 						}
 					}
 				}
+			}
+			
+			nbPionsJoueurInactifs = nbPionsJoueurInactifs / ( WIDTH * HEIGHT);
+			if(nbPionsJoueurInactifs == lesPionsDuJoueur.length){
+				s.getSuccesseurs().removeAll(s.getSuccesseurs());
+				System.out.println("plus de pions : no future");
 			}
 		}
 	}
