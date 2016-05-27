@@ -53,14 +53,23 @@ public class GestionJeuYote {
 	{
 		boolean result = false;
 		Point p = pion.getPosition();
+		if (p!=null) {
+			System.out.println("posution : " + p.getX() + "/" + p.getY());
+		}
+		else {
+			System.out.println("pas de position");
+		}
 		
 		if(i<WIDTH && j<HEIGHT) result = (matriceJeu[i][j] == 0);
 		if(result && p!=null) // s'il s'agit d'un déplacement 
 		{
 			Point dest = new Point(i,j);
 			Point anciennePosition = pion.getAnciennePosition();
+			//System.out.println("Ancienne position : " + anciennePosition.getX() + " / " + anciennePosition.getY());
 //				System.err.println("dest = " + dest+", anciennePosition = " + anciennePosition + ", egalité = " + dest.equals(anciennePosition));
-			if(dest.equals(anciennePosition)) result = false;
+			if(dest.equals(anciennePosition)) {
+				result = false; 		
+			}
 			if(result)
 			{
 				double d = dest.distance(p);
@@ -74,7 +83,9 @@ public class GestionJeuYote {
 					if(contenuCaseIntermediaire== pion.getJoueur() || contenuCaseIntermediaire == 0) result = false;
 					if (result) 
 					{
-						appli.removeTokenOnPoint( intermediaire.x,intermediaire.y);
+						System.out.println("on retire un pion blanc : " + intermediaire.x + " / " + intermediaire.y);
+						
+						appli.removeTokenOnPoint(intermediaire.x,intermediaire.y);
 						matriceJeu[intermediaire.x][intermediaire.y] = 0;
 						appli.setCapture(true);
 						appli.setText(appli.txtJoueur[noJoueurActif-1] + appli.textePrise);
@@ -86,9 +97,9 @@ public class GestionJeuYote {
 	}
 	
 	public boolean isPosePossibleForArbre(DessinPion pion, int i, int j) {
-		boolean result = false;
+		//boolean result = false;
 		Point p = pion.getPosition();
-		
+		boolean result = false;
 		if(i<WIDTH && j<HEIGHT) result = (matriceJeu[i][j] == 0);
 		if(result && p!=null) // s'il s'agit d'un déplacement 
 		{
@@ -116,13 +127,22 @@ public class GestionJeuYote {
 	
 	public void poseJeton(DessinPion pion, int i, int j)
 	{
-		Point p =pion.getPosition();
+		Point p = pion.getPosition();
 		if(p!=null)
 		{
-			matriceJeu[p.x][p.y]  = 0;
+			matriceJeu[p.x][p.y] = 0;
 		}
+		
+		for (int iBis = 0; iBis < WIDTH; iBis++) {
+			for (int jBis = 0; jBis < HEIGHT; jBis++) {
+				System.out.print(" " + matriceJeu[iBis][jBis]);
+			}
+			System.out.println();
+		}
+		
 		matriceJeu[i][j]  = pion.getJoueur();
 		p = new Point(i,j);
+		System.out.println("on set la position");
 		pion.setPosition(p);
 		
 		if(!appli.isCapture()) switchJoueur();
@@ -170,10 +190,10 @@ public class GestionJeuYote {
 						DessinPion[][] lesPionsDeduits = new DessinPion[2][12];
 						copiePions(lesPions, lesPionsDeduits);
 						DessinPion lePionModifie = lesPionsDeduits[noJoueurActif - 1][k];
-						if(! lePionModifie.isVisible()){
+						if(!lePionModifie.isVisible() || !lePionModifie.getIsOnGame()){
 							nbPionsJoueurInactifs++;
 						}
-						if (jeuPossible(i,j,lePionModifie) && isPosePossibleForArbre(lesPionsDuJoueur[k],i, j))
+						if (jeuPossible(i,j,lePionModifie) && isPosePossibleForArbre(lesPionsDuJoueur[k], i, j) && lePionModifie.isVisible() && lePionModifie.getIsOnGame())
 						{
 							//if (!s.isCapture)
 							Situation sprim = new Situation(0, !s.isMax());

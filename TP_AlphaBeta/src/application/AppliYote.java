@@ -1,16 +1,16 @@
 package application;
 
-import gui.ChoixCouleursControleur;
-
 import java.net.URL;
+import java.util.ArrayList;
 
-import modele.GestionJeuYote;
-import modele.Situation;
+import gui.ChoixCouleursControleur;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
@@ -18,19 +18,18 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
-import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
+import modele.GestionJeuYote;
+import modele.Situation;
 
 public class AppliYote extends Application implements  EventHandler<MouseEvent> {
 
@@ -346,6 +345,30 @@ public class AppliYote extends Application implements  EventHandler<MouseEvent> 
 				timelineBis.play();
 				if(!this.capture) 
 					this.texte.setText(this.txtJoueur[this.gestionJeu.getNoJoueurActif()-1] + this.texteSelection);
+				else {
+					//capture d'un pion aléatoire
+					System.out.println("Capture par l'IA");
+					DessinPion[] pionsDuJoueur = this.pions[0];
+					ArrayList<Integer> tableOfIndex = new ArrayList<Integer>();
+					for (int m = 0; m < pionsDuJoueur.length; m++) {
+						if (pionsDuJoueur[m].isVisible() || pionsDuJoueur[m].getIsOnGame()) {
+							tableOfIndex.add(m);
+						}
+					}
+					int randomNumber = (int)(Math.random()*tableOfIndex.size());					
+					//Il faut retirer le pion et l'éliminer
+					DessinPion pionToRemove = this.pions[0][randomNumber];				
+					System.out.println("Pion choisi :" + randomNumber);
+					double xBis = pionToRemove.getCenterX();
+					double yBis = pionToRemove.getCenterY();
+					int iBis = (int)((xBis - tailleCase) / tailleCase);
+					int jBis = (int)((yBis - tailleCase) / tailleCase);
+					this.gestionJeu.retirePion(iBis,jBis);
+					eliminerPion(pionToRemove);					
+					this.capture = false;
+					this.gestionJeu.switchJoueur();
+					this.texte.setText(txtJoueur[this.gestionJeu.getNoJoueurActif()-1] + this.texteSelection);
+				}
 			}
 		}
 		else {
@@ -374,6 +397,8 @@ public class AppliYote extends Application implements  EventHandler<MouseEvent> 
 	{
 		int x = (i+1)*this.tailleCase ;
 		int y = (j+1)*this.tailleCase ;
+		int oldI = i;
+		int oldJ = j;
 		boolean found=false;
 //		System.err.println("cherche pion à supprimer en " + x + "," + y);
 		DessinPion pionAEliminer=null;
@@ -382,12 +407,21 @@ public class AppliYote extends Application implements  EventHandler<MouseEvent> 
 			{
 				DessinPion pion = this.pions[i][j];
 //				System.err.println("trouvé pion  " + pion.getCenterX() + "," + pion.getCenterY());
-
 				if((pion.getCenterX()  == x) && (pion.getCenterY()  == y))
 				{
 //					System.err.println("trouvé pion à supprimer " );
 					found = true;
+					if (pion.getPosition() != null) {
+						System.out.println("Position du pion repéré :" + pion.getPosition().getX() + "/" + pion.getPosition().getY());
+					}
 					pionAEliminer = pion;
+				}
+				else if(pion.getPosition() != null) {
+					if (pion.getPosition().getX() == oldI && pion.getPosition().getY() == oldJ) {
+						System.err.println("trouvé pion à supprimer " );
+						found = true;
+						pionAEliminer = pion;
+					}
 				}
 			}
 		if(pionAEliminer!=null)
@@ -395,13 +429,18 @@ public class AppliYote extends Application implements  EventHandler<MouseEvent> 
 //			System.err.println("trouvé pion à supprimer " + pionAEliminer);
 			 eliminerPion(pionAEliminer);
 		}
+		else {
+			System.out.println("pion non trouver après removeTokeOnePoint i/j" + i + "/" + j + "\nx/y" + x + "/" + y);
+		}
 			
 	}
 	
 	/**desactiver le pion */
 	void eliminerPion(DessinPion pion)
 	{
+		System.out.println("Set visible à false");
 		pion.setVisible(false);
+		pion.setIsOnGame(false);
 		pion.setOnMouseClicked(null);
 		pion.setCenterX(0);
 		pion.setCenterY(0);

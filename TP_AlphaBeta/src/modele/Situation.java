@@ -60,6 +60,7 @@ public class Situation {
 	/**Pion � droite*/
 	DessinPion[][] pions;
 	
+
 	int index;
 	
 	public int getIndex() {

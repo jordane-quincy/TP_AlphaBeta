@@ -14,6 +14,17 @@ public class DessinPion extends Circle implements Cloneable {
 	Color cj;
 	/**position du jeton dans la grille (null si non posé)*/
 	Point position;
+	
+	boolean isOnGame = true;
+	
+	public boolean getIsOnGame() {
+		return isOnGame;
+	}
+
+	public void setIsOnGame(boolean isOnGame) {
+		this.isOnGame = isOnGame;
+	}
+
 	/**ancienne position du jeton dans la grille (null si non posé)*/
 	Point anciennePosition;
 	/**couleur pour joueur 1*/
@@ -109,5 +120,13 @@ public class DessinPion extends Circle implements Cloneable {
 		}
 		
 		return p;
+	}
+	
+	public String toString() {
+		if (position != null) {
+			return "x/y :" + position.getX() + " / " + position.getY() + "\nJoueur : " + joueur;
+		}
+		else
+			return "";
 	}
 }
